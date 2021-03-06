@@ -19,6 +19,7 @@ defmodule KodeChan.Core do
   """
   def list_posts do
     Repo.all(Posts)
+    |> Repo.preload(:user)
   end
 
   @doc """
