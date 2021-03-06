@@ -8,6 +8,7 @@ defmodule KodeChanWeb.Router do
     plug :put_root_layout, {KodeChanWeb.LayoutView, :root}
     plug :protect_from_forgery
     plug :put_secure_browser_headers
+    plug KodeChanWeb.Auth
   end
 
   pipeline :api do
@@ -18,6 +19,14 @@ defmodule KodeChanWeb.Router do
     pipe_through :browser
 
     live "/", PageLive, :index
+  end
+
+  scope "/auth", KodeChanWeb do
+    pipe_through([:browser])
+    get("/:provider", AuthController, :request)
+    get("/:provider/callback", AuthController, :callback)
+    post("/:provider/callback", AuthController, :callback)
+    delete("/logout", AuthController, :delete)
   end
 
   # Other scopes may use custom stacks.
