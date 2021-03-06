@@ -18,7 +18,7 @@ defmodule KodeChanWeb.Router do
   scope "/", KodeChanWeb do
     pipe_through :browser
 
-    live "/", PageLive, :index
+    live "/", IndexLive, :index
   end
 
   scope "/auth", KodeChanWeb do
