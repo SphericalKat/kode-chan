@@ -12,6 +12,10 @@
 
 require Jason
 require Logger
+alias KodeChan.Repo
 
-KodeChan.Repo.insert!(%KodeChan.Accounts.User{name: "John Doe", id: 69})
-KodeChan.Repo.insert!(%KodeChan.Core.Posts{title: "Welcome to KodeChan", user_id: 69, content: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."})
+Repo.delete!(%KodeChan.Accounts.User{id: 69})
+
+# user = Repo.insert!(%KodeChan.Accounts.User{name: "John Doe", id: 69})
+# post = Ecto.build_assoc(user, :posts, %{title: "Welcome to KodeChan", content: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."})
+# Repo.insert!(post)

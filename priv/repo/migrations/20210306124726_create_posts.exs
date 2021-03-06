@@ -4,8 +4,8 @@ defmodule KodeChan.Repo.Migrations.CreatePosts do
   def change do
     create table(:posts) do
       add :title, :string
-      add :content, :string
-      add :user_id, references(:users, on_delete: :nothing)
+      add :content, :text
+      add :user_id, references(:users, on_delete: :delete_all)
 
       timestamps()
     end

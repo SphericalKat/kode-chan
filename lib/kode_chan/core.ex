@@ -50,8 +50,8 @@ defmodule KodeChan.Core do
       {:error, %Ecto.Changeset{}}
 
   """
-  def create_posts(attrs \\ %{}) do
-    %Posts{}
+  def create_posts(attrs \\ %{}, user) do
+    Ecto.build_assoc(user, :posts, attrs)
     |> Posts.changeset(attrs)
     |> Repo.insert()
   end

@@ -16,5 +16,7 @@ defmodule KodeChan.Core.Posts do
     posts
     |> cast(attrs, [:title, :content])
     |> validate_required([:title, :content])
+    |> validate_length(:title, min: 5)
+    |> validate_length(:content, min: 20)
   end
 end
