@@ -7,7 +7,6 @@ defmodule KodeChanWeb.AuthController do
 
   def delete(conn, _params) do
     conn
-    |> put_flash(:info, "You have been logged out")
     |> configure_session(drop: true)
     |> redirect(to: "/")
   end
@@ -23,7 +22,6 @@ defmodule KodeChanWeb.AuthController do
          {:ok, user} <-
            Accounts.get_or_create_user(user) do
       conn
-      |> put_flash(:info, "Successfully authenticated.")
       |> Auth.put_current_user(user)
       |> redirect(to: "/")
     else
