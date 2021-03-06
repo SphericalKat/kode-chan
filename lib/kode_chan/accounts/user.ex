@@ -6,6 +6,7 @@ defmodule KodeChan.Accounts.User do
     field :avatar, :string
     field :email, :string
     field :name, :string
+    has_many :posts, KodeChan.Core.Posts
 
     timestamps()
   end
