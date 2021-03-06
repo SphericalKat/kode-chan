@@ -9,9 +9,10 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        "card-grey": "#1F1F24",
+        "card-grey": "#26262C",
         "body-grey": "#16161A",
         "accent-green": "#3DFDAF",
+        "accent-purple": "#6b4cff",
       },
     },
   },

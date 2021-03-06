@@ -13,6 +13,14 @@
   display: none;
 }
 
+html {
+  width: 100%;
+}
+
+body {
+  width: 100%;
+}
+
 .phx-click-loading {
   opacity: 0.5;
   transition: opacity 1s ease-out;
