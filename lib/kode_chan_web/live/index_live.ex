@@ -29,7 +29,7 @@ defmodule KodeChanWeb.IndexLive do
   def handle_event("save", %{"posts" => params}, %{assigns: %{current_user: user}} = socket) do
     case Core.create_posts(params, user) do
       {:ok, _post} ->
-        {:noreply, assign(socket, posts: Core.list_posts())}
+        {:noreply, socket |> redirect(to: "/")}
 
       {:error, %Ecto.Changeset{} = changeset} ->
         {:noreply, assign(socket, changeset: changeset)}

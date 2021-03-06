@@ -18,7 +18,10 @@ defmodule KodeChan.Core do
 
   """
   def list_posts do
-    Repo.all(Posts)
+    Posts
+    |> order_by([p], p.updated_at)
+    |> reverse_order
+    |> Repo.all()
     |> Repo.preload(:user)
   end
 
