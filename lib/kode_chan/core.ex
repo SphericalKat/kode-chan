@@ -16,6 +16,7 @@ defmodule KodeChan.Core do
 
   defp broadcast_change({:ok, result}, event) do
     Phoenix.PubSub.broadcast(KodeChan.PubSub, @topic, {__MODULE__, event, result})
+    {:ok, result}
   end
 
   @doc """
@@ -67,7 +68,6 @@ defmodule KodeChan.Core do
     Ecto.build_assoc(user, :posts, attrs)
     |> Posts.changeset(attrs)
     |> Repo.insert()
-    |> broadcast_change([:posts, :created])
   end
 
   @doc """
@@ -86,7 +86,6 @@ defmodule KodeChan.Core do
     posts
     |> Posts.changeset(attrs)
     |> Repo.update()
-    |> broadcast_change([:posts, :updated])
   end
 
   @doc """
@@ -104,7 +103,6 @@ defmodule KodeChan.Core do
   def delete_posts(%Posts{} = posts) do
     posts
     |> Repo.delete()
-    |> broadcast_change([:posts, :deleted])
   end
 
   @doc """

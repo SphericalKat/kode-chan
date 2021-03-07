@@ -19,6 +19,7 @@ defmodule KodeChanWeb.IndexLive do
      })}
   end
 
+
   def handle_event("validate", %{"posts" => params}, socket) do
     changeset =
       %Posts{}
