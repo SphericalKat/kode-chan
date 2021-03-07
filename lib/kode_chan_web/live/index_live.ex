@@ -9,6 +9,8 @@ defmodule KodeChanWeb.IndexLive do
   require Jason
 
   def mount(_params, %{"user_id" => user_id}, socket) do
+    Core.subscribe()
+
     {:ok,
      assign(socket, %{
        current_user: Accounts.get_user_from_id(user_id),
@@ -34,5 +36,9 @@ defmodule KodeChanWeb.IndexLive do
       {:error, %Ecto.Changeset{} = changeset} ->
         {:noreply, assign(socket, changeset: changeset)}
     end
+  end
+
+  def handle_info({Posts, [:post | _], _}, socket) do
+    {:noreply, assign(socket, posts: Core.list_posts())}
   end
 end

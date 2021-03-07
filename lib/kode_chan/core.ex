@@ -8,6 +8,16 @@ defmodule KodeChan.Core do
 
   alias KodeChan.Core.Posts
 
+  @topic inspect(__MODULE__)
+
+  def subscribe do
+    Phoenix.PubSub.subscribe(KodeChan.PubSub, @topic)
+  end
+
+  defp broadcast_change({:ok, result}, event) do
+    Phoenix.PubSub.broadcast(KodeChan.PubSub, @topic, {__MODULE__, event, result})
+  end
+
   @doc """
   Returns the list of posts.
 
@@ -57,6 +67,7 @@ defmodule KodeChan.Core do
     Ecto.build_assoc(user, :posts, attrs)
     |> Posts.changeset(attrs)
     |> Repo.insert()
+    |> broadcast_change([:posts, :created])
   end
 
   @doc """
@@ -75,6 +86,7 @@ defmodule KodeChan.Core do
     posts
     |> Posts.changeset(attrs)
     |> Repo.update()
+    |> broadcast_change([:posts, :updated])
   end
 
   @doc """
@@ -90,7 +102,9 @@ defmodule KodeChan.Core do
 
   """
   def delete_posts(%Posts{} = posts) do
-    Repo.delete(posts)
+    posts
+    |> Repo.delete()
+    |> broadcast_change([:posts, :deleted])
   end
 
   @doc """

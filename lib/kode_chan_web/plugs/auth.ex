@@ -1,7 +1,5 @@
 defmodule KodeChanWeb.Auth do
   import Plug.Conn
-  import Phoenix.Controller
-  alias KodeChanWeb.Router.Helpers, as: Routes
   alias KodeChan.Accounts
 
   def init(opts), do: opts
